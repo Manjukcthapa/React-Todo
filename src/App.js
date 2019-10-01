@@ -81,14 +81,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className = "maindiv">
         <h2>Welcome to your Todo App!</h2>
         <TodoList
           displayList={this.state.displayList}
           toggleTask={this.toggleTask}
         />
         <TodoForm addTask={this.addTask} />
-        <button className="clear" onClick={this.clearCompleted}>
+        <button  className="clear" onClick={this.clearCompleted}>
           Clear Completed
         </button>
         <Search 
