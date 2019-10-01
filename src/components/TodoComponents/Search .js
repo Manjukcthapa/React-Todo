@@ -34,7 +34,7 @@ class SearchForm extends React.Component {
                     />
                     <button type="submit">Search</button>
                 </form>
-              
+                <button onClick={this.props.clearSearch}>Clear Search</button>
             </div>
         );
     }
