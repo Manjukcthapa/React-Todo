@@ -21,6 +21,7 @@ class TodoForm extends React.Component {
             task: ''
         })
     };
+   
 
     render(){
         return(
@@ -34,7 +35,7 @@ class TodoForm extends React.Component {
                     />
                     <button type="submit">Add Task</button>
                 </form>
-                <button onClick={this.props.clearCompleted}>Clear Completed</button>
+               
             </div>
         );
     }
