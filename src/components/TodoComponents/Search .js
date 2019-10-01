@@ -4,7 +4,7 @@ class SearchForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            query: ''
+            search: ''
         };
     }
 
@@ -23,12 +23,12 @@ class SearchForm extends React.Component {
                     <input
                         type="text"
                         value={this.state.search}
-                        name="query"
+                        name="search"
                         onChange={this.handleChanges}
                     />
                     <button type="submit">Search</button>
                 </form>
-                <button onClick={this.props.clearSearch}>Clear Search</button>
+              
             </div>
         );
     }

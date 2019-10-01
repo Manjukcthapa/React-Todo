@@ -1,6 +1,7 @@
 import React from "react";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
+import Search from "./components/TodoComponents/Search "
 
 const List = [
   {
@@ -59,6 +60,12 @@ class App extends React.Component {
     console.log(this.state.displayList);
   
   };
+  searchList = (search) => {
+    this.setState({
+      displayList: this.state.displayList.filter(task => task.task.includes(search))
+    });
+    console.log(this.state.displayList);
+  }
 
   render() {
     return (
@@ -70,6 +77,8 @@ class App extends React.Component {
         />
         <TodoForm addTask={this.addTask}  />
         <button className='clear' onClick={this.clearCompleted}>Clear Completed</button>
+        <Search
+         searchList={this.searchList}/>
       </div>
     );
   }
