@@ -20,7 +20,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      displayList: List
+      displayList: List,
+      searchResult: []
     };
   }
 
@@ -61,11 +62,10 @@ class App extends React.Component {
 
   searchList = search => {
     this.setState({
-      displayList: this.state.displayList.filter(task =>
+      searchResult: this.state.displayList.filter(task =>
         task.task.includes(search)
       )
     });
-    console.log(this.state.displayList);
   };
 
 
@@ -76,8 +76,7 @@ class App extends React.Component {
   componentDidMount() {
     if (localStorage.getItem("todo")) {
       this.setState({
-        todo: JSON.parse(localStorage.getItem("todo")),
-        searched: JSON.parse(localStorage.getItem("todo"))
+        displayList: JSON.parse(localStorage.getItem("todo"))
       });
     } else {
       localStorage.setItem("todo", JSON.stringify([]));
@@ -95,7 +94,7 @@ class App extends React.Component {
       <div className = "maindiv">
         <h2>Welcome to your Todo App!</h2>
         <TodoList
-          displayList={this.state.displayList}
+          displayList={ this.state.searchResult.length ? this.state.searchResult: this.state.displayList}
           toggleTask={this.toggleTask}
         />
         <TodoForm addTask={this.addTask} />

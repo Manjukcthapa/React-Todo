@@ -1,21 +1,19 @@
-import React from 'react';
-import './Todo.css'
-
+import React from "react";
+import "./Todo.css";
 
 function Todo(props) {
-    let completed = props.task.completed ? ' completed' : '';
-    return (
-        <div
-            className={`task ${completed}`}
-            key={props.task.id}
-            onClick={event => {
-                props.toggleTask(props.task.id);
-            }}
-        >
-
-                   <p>{props.task.task}</p> 
-                </div>
-    );
+  let completed = props.task.completed ? " completed" : "";
+  return (
+    <div
+      className={`task ${completed}`}
+      key={props.task.id}
+      onClick={event => {
+        props.toggleTask(props.task.id);
+      }}
+    >
+      <p>{props.task.task}</p>
+    </div>
+  );
 }
 
 export default Todo;
