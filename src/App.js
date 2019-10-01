@@ -68,16 +68,27 @@ class App extends React.Component {
     console.log(this.state.displayList);
   };
 
-  clearSearch = () => {
-    this.setState({
-      toDo: this.state.displayList
-    });
-    console.log(this.state.toDo);
-  };
 
   testSearch = () => {
     this.searchList("Organize");
   }
+
+  componentDidMount() {
+    if (localStorage.getItem("todo")) {
+      this.setState({
+        todo: JSON.parse(localStorage.getItem("todo")),
+        searched: JSON.parse(localStorage.getItem("todo"))
+      });
+    } else {
+      localStorage.setItem("todo", JSON.stringify([]));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("todo", JSON.stringify(this.state.displayList));
+  }
+
+  
 
   render() {
     return (
@@ -93,7 +104,8 @@ class App extends React.Component {
         </button>
         <Search 
         searchList={this.searchList} 
-        testSearch = {this.testSearch}/>
+        testSearch = {this.testSearch}
+        />
       </div>
     );
   }
