@@ -8,7 +8,7 @@ const TodoList = props => {
     <div>
       <ul>
         {props.displayList.map(task => (
-          <Todo key={task.id} task={task} />
+          <Todo key={task.id} task={task}  toogleTask = {props.toogleTask}/>
         ))}
       </ul>
     </div>
