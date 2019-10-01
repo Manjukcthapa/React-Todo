@@ -1,7 +1,7 @@
 import React from "react";
 import TodoList from "./components/TodoComponents/TodoList";
 import TodoForm from "./components/TodoComponents/TodoForm";
-import Search from "./components/TodoComponents/Search "
+import Search from "./components/TodoComponents/Search ";
 
 const List = [
   {
@@ -20,8 +20,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      displayList: List,
-      
+      displayList: List
     };
   }
 
@@ -58,13 +57,26 @@ class App extends React.Component {
       displayList: this.state.displayList.filter(task => !task.completed)
     });
     console.log(this.state.displayList);
-  
   };
-  searchList = (search) => {
+
+  searchList = search => {
     this.setState({
-      displayList: this.state.displayList.filter(task => task.task.includes(search))
+      displayList: this.state.displayList.filter(task =>
+        task.task.includes(search)
+      )
     });
     console.log(this.state.displayList);
+  };
+
+  clearSearch = () => {
+    this.setState({
+      toDo: this.state.displayList
+    });
+    console.log(this.state.toDo);
+  };
+
+  testSearch = () => {
+    this.searchList("Organize");
   }
 
   render() {
@@ -75,10 +87,13 @@ class App extends React.Component {
           displayList={this.state.displayList}
           toggleTask={this.toggleTask}
         />
-        <TodoForm addTask={this.addTask}  />
-        <button className='clear' onClick={this.clearCompleted}>Clear Completed</button>
-        <Search
-         searchList={this.searchList}/>
+        <TodoForm addTask={this.addTask} />
+        <button className="clear" onClick={this.clearCompleted}>
+          Clear Completed
+        </button>
+        <Search 
+        searchList={this.searchList} 
+        testSearch = {this.testSearch}/>
       </div>
     );
   }
