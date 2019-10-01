@@ -14,7 +14,13 @@ class SearchForm extends React.Component {
         });
     }
 
-   
+   submitSearch = e => {
+       e.preventDefault();
+       this.props.searchList(this.state.search)
+       this.setState({
+           search:''
+       })
+   }
 
     render(){
         return(
