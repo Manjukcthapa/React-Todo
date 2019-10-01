@@ -1,13 +1,110 @@
-import React from 'react';
+import React from "react";
+import TodoList from "./components/TodoComponents/TodoList";
+import TodoForm from "./components/TodoComponents/TodoForm";
+import Search from "./components/TodoComponents/Search ";
+
+const List = [
+  {
+    task: "Organize Garage",
+    id: 1528817077286,
+    completed: false
+  },
+  {
+    task: "Bake Cookies",
+    id: 1528817084358,
+    completed: false
+  }
+];
 
 class App extends React.Component {
-  // you will need a place to store your state in this component.
-  // design `App` to be the parent component of your application.
-  // this component is going to take care of state, and any change handlers you need to work with your state
+  constructor() {
+    super();
+    this.state = {
+      displayList: List,
+      searchResult: []
+    };
+  }
+
+  toggleTask = id => {
+    this.setState({
+      displayList: this.state.displayList.map(task => {
+        if (task.id === id) {
+          return {
+            task: task.task,
+            id: task.id,
+            completed: !task.completed
+          };
+        } else {
+          return task;
+        }
+      })
+    });
+  };
+
+  addTask = taskName => {
+    const newTask = {
+      task: taskName,
+      id: Date.now(),
+      completed: false
+    };
+    this.setState({
+      displayList: [...this.state.displayList, newTask]
+    });
+    console.log(this.state.displayList);
+  };
+
+  clearCompleted = () => {
+    this.setState({
+      displayList: this.state.displayList.filter(task => !task.completed)
+    });
+    console.log(this.state.displayList);
+  };
+
+  searchList = search => {
+    this.setState({
+      searchResult: this.state.displayList.filter(task =>
+        task.task.includes(search)
+      )
+    });
+  };
+
+
+  testSearch = () => {
+    this.searchList("Organize");
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem("todo")) {
+      this.setState({
+        displayList: JSON.parse(localStorage.getItem("todo"))
+      });
+    } else {
+      localStorage.setItem("todo", JSON.stringify([]));
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem("todo", JSON.stringify(this.state.displayList));
+  }
+
+  
+
   render() {
     return (
-      <div>
+      <div className = "maindiv">
         <h2>Welcome to your Todo App!</h2>
+        <TodoList
+          displayList={ this.state.searchResult.length ? this.state.searchResult: this.state.displayList}
+          toggleTask={this.toggleTask}
+        />
+        <TodoForm addTask={this.addTask} />
+        <button  className="clear" onClick={this.clearCompleted}>
+          Clear Completed
+        </button>
+        <Search 
+        searchList={this.searchList} 
+        testSearch = {this.testSearch}
+        />
       </div>
     );
   }
